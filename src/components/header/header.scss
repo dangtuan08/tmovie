@@ -18,7 +18,7 @@
   align-items: center;
   justify-content: space-between;
   height: 100%;
-  padding: 0 3.6rem;
+  padding: 0 3.2rem;
 }
 
 .logo {
@@ -41,7 +41,7 @@
   list-style: none;
 
   & > * ~ * {
-    margin-left: 2rem;
+    margin-left: 3.2rem;
   }
 
   li {
@@ -51,7 +51,7 @@
     font-size: 2.4rem;
 
     &:hover a {
-      color: var(--primary-color);
+      color: var(--main-color);
     }
 
     &::after {

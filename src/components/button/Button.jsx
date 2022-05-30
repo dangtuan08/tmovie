@@ -1,6 +1,7 @@
 import React from "react";
+import "./button.scss";
 
-function Button(props) {
+const Button = (props) => {
   return (
     <button
       onClick={
@@ -10,26 +11,28 @@ function Button(props) {
             }
           : null
       }
-      className={`btn ${props.className}`}
+      className={`btn ${props.className ? props.className : ""}`}
     >
       {props.children}
     </button>
   );
-}
+};
 
-export const OutLineButton = (props) => {
-  <Button
-    className={`btn-outline ${props.className}`}
-    onClick={
-      props.onClick
-        ? () => {
-            return props.onClick();
-          }
-        : null
-    }
-  >
-    {props.children}
-  </Button>;
+export const OutlineButton = (props) => {
+  return (
+    <Button
+      className={`btn-outline ${props.className ? props.className : ""}`}
+      onClick={
+        props.onClick
+          ? () => {
+              return props.onClick();
+            }
+          : null
+      }
+    >
+      {props.children}
+    </Button>
+  );
 };
 
 export default Button;
