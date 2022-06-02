@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper";
-import { useNavigate } from "react-router-dom";
 import "swiper/css";
 
-import Button, { OutlineButton } from "../button/Button";
-
-import apiConfig from "../../api/apiConfig";
-import tmdbApi, { movieType } from "../../api/tmdbApi";
 import "./caroucel.scss";
 import CaroucelItem from "./CaroucelItem";
+import { useSelector } from "react-redux";
 
 function Caroucel() {
-  const [movieItems, setMovieItems] = useState([]);
+  // const [movieItems, setMovieItems] = useState([]);
+  let listMoviesShow = [];
+  const listMovies = useSelector(
+    (state) => state.movieReducer.listMoviePopular.results
+  );
+  if (listMovies) {
+    listMoviesShow = listMovies.slice(0, 5);
+  }
 
+  // Call API trực tiếp dùng async/await
   // useEffect(() => {
   //   const getMovies = async () => {
   //     const params = { page: 1 };
@@ -30,19 +34,20 @@ function Caroucel() {
   //   getMovies();
   // }, []);
 
-  useEffect(() => {
-    tmdbApi
-      .getMoviesList(movieType.popular, { params: { page: 1 } })
-      .then((res) => {
-        console.log(res.results);
-        let items = [];
-        items = res.results;
-        setMovieItems(items.slice(0, 4));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // Call API trực tiếp dùng .then.catch
+  // useEffect(() => {
+  //   tmdbApi
+  //     .getMoviesList(movieType.popular, { params: { page: 1 } })
+  //     .then((res) => {
+  //       console.log(res.results);
+  //       let items = [];
+  //       items = res.results;
+  //       setMovieItems(items.slice(0, 4));
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   return (
     <div className="movie-slide">
@@ -53,7 +58,7 @@ function Caroucel() {
         }}
         modules={[Autoplay]}
       >
-        {movieItems.map((item, index) => {
+        {listMoviesShow.map((item, index) => {
           return (
             <SwiperSlide key={item.id}>
               {({ isActive }) => (

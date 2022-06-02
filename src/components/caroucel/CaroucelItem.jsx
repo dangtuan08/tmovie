@@ -16,7 +16,7 @@ const CaroucelItem = (props) => {
     <div
       className={`movie-slide__item ${props.className}`}
       style={{
-        backgroundImage: `url("${urlPoster}")`,
+        backgroundImage: `url("${urlImgBG}")`,
       }}
     >
       <div className="movie-slide__item__content container">

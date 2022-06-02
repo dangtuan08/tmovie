@@ -30,11 +30,6 @@ html {
   // mặc định 62.5% = 10px
   font-size: 62.5%;
 }
-@media only screen and (max-width: 600px) {
-  html {
-    font-size: 37.5%;
-  }
-}
 
 @media only screen and (max-width: 1024px) {
   html {
@@ -42,6 +37,11 @@ html {
   }
 }
 
+@media only screen and (max-width: 600px) {
+  html {
+    font-size: 37.5%;
+  }
+}
 body {
   font-family: var(--font-family);
   // 1.6rem tương đương 16px
@@ -81,6 +81,14 @@ input,
 a[href] {
   color: var(--text-color);
   text-decoration: none;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
 }
 
 // CSS SCROLLBAR

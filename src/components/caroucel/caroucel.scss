@@ -42,7 +42,7 @@
   width: 55%;
 
   & .title {
-    font-size: 8rem;
+    font-size: 7rem;
     font-weight: 700;
     line-height: 1;
   }
@@ -218,14 +218,14 @@
 // }
 
 @media only screen and (max-width: 1024px) {
-  .hero-slide__item__content__info {
+  .movie-slide__item__content__info {
     width: 100%;
 
     .title {
       font-size: 6.4rem;
     }
   }
-  .hero-slide__item__content__poster {
+  .movie-slide__item__content__poster {
     display: none;
   }
 }
