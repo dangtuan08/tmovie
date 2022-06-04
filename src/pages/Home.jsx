@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
 import Caroucel from "../components/caroucel/Caroucel";
 import { useDispatch, useSelector } from "react-redux";
+
 import { getListMovies } from "../slices/movieSlice";
 import { movieType } from "../api/tmdbApi";
 import { css } from "@emotion/react";
 import { BeatLoader } from "react-spinners";
+import MovieList from "../components/movie-list/MovieList";
+
 function Home() {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.movieReducer.loading);
@@ -31,6 +34,7 @@ function Home() {
       ) : (
         <>
           <Caroucel />
+          <MovieList />
         </>
       )}
     </>

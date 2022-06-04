@@ -1,0 +1,85 @@
+.movie-card {
+  h3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &:hover h3,
+  h3:hover {
+    color: var(--main-color);
+  }
+}
+.movie-card__poster {
+  position: relative;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 160%;
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+
+  & .overlay {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba($color: #000000, $alpha: 0.6);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity ease 0.2s;
+  }
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: var(--border-radius);
+    // margin-bottom: 1.3rem;
+  }
+
+  .btn-trailer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    font-size: 2.8rem;
+    padding: 0.2rem 2rem;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &:hover .overlay,
+  &:hover .btn-trailer {
+    // display: block;
+    opacity: 1;
+  }
+
+  &:hover .btn-trailer {
+    // display: block;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .movie-card__poster {
+    .btn-trailer {
+      font-size: 5rem;
+      padding: 0 3rem;
+    }
+  }
+}
