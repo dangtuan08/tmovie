@@ -2,8 +2,11 @@ import React, { useEffect } from "react";
 import Caroucel from "../components/caroucel/Caroucel";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getListMovies } from "../slices/movieSlice";
-import { movieType } from "../api/tmdbApi";
+import {
+  getListMoviesPopuler,
+  getListMoviesTopRate,
+} from "../slices/movieSlice";
+import { category, movieType } from "../api/tmdbApi";
 import { css } from "@emotion/react";
 import { BeatLoader } from "react-spinners";
 import MovieList from "../components/movie-list/MovieList";
@@ -16,7 +19,14 @@ function Home() {
     const page = 1;
 
     dispatch(
-      getListMovies({ type: movieType.popular, params: { page: page } })
+      getListMoviesPopuler({ type: movieType.popular, params: { page: page } })
+    );
+
+    dispatch(
+      getListMoviesTopRate({
+        type: movieType.top_rated,
+        params: { page: page },
+      })
     );
   }, []);
 
@@ -34,6 +44,8 @@ function Home() {
       ) : (
         <>
           <Caroucel />
+          <MovieList category={category.movie} type={movieType.popular} />
+          <MovieList category={category.movie} type={movieType.top_rated} />
           <MovieList />
         </>
       )}

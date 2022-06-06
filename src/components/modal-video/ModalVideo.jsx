@@ -30,7 +30,7 @@ function ModalVideo() {
           X
         </button>
       </div>
-      <div className="overlay"></div>
+      <div className="overlay" onClick={handleClose}></div>
     </div>
   );
 }
