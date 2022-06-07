@@ -1,0 +1,19 @@
+.footer{
+    position: relative;
+    padding: 6rem 2rem;
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.footer__content{
+    max-width: 1000px;
+    margin: auto;
+}
+
+
+.footer__content--logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
