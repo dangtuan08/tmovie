@@ -1,49 +1,96 @@
-import React from "react";
-import { OutlineButton } from "../button/Button";
-import "./movieList.scss";
-
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, FreeMode } from "swiper";
+import { Autoplay, FreeMode, Navigation } from "swiper";
+// import "swiper/css";
+// import "swiper/css/free-mode";
+// import "swiper/css/navigation";
 import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/pagination";
+import "swiper/css/bundle";
 
 import MovieCard from "../movie-card/MovieCard";
 import { useSelector } from "react-redux";
-import { category, movieType } from "../../api/tmdbApi";
+import { category, movieType, tvType } from "../../api/tmdbApi";
+import { OutlineButton } from "../button/Button";
+import "./movieList.scss";
 
 function MovieList(props) {
   // console.log(listMoviePopular.results);
-  // console.log(props.category);
+  // console.log(props.category, props.type);
 
-  let title = "";
-
+  let title = props.title;
   let listMovie = [];
 
-  const listMovieTopRate = useSelector(
-    (state) => state.movieReducer.listMovieTopRate
-  );
-  const listMoviePopular = useSelector(
-    (state) => state.movieReducer.listMoviePopular
-  );
+  const listMovieTopRate = useSelector((state) => {
+    if (
+      props.category === category.movie &&
+      props.type === movieType.top_rated
+    ) {
+      // console.log("toprate");
+      return state.movieReducer.listMovieTopRate;
+    } else {
+      return null;
+    }
+  });
 
-  if (props.category === category.movie) {
-    switch (props.type) {
-      case movieType.popular:
-        title = "Trending Movies";
-        // console.log(listMoviePopular.results);
+  const listMoviePopular = useSelector((state) => {
+    if (props.category === category.movie && props.type === movieType.popular) {
+      return state.movieReducer.listMoviePopular;
+    } else {
+      return null;
+    }
+  });
 
-        listMovie = listMoviePopular;
-        break;
-      default:
-        listMovie = listMovieTopRate;
-        console.log(listMovieTopRate.results);
+  const listTvPopular = useSelector((state) => {
+    if (props.category === category.tv && props.type === tvType.popular) {
+      return state.movieReducer.listTvPopular;
+    } else {
+      return null;
+    }
+  });
 
-        title = "Top Rate Movies";
-        break;
+  const listTvTopRate = useSelector((state) => {
+    if (props.category === category.tv && props.type === tvType.top_rated) {
+      return state.movieReducer.listTvTopRate;
+    } else {
+      return null;
+    }
+  });
+
+  if (props.type !== "similar") {
+    if (props.category === category.movie) {
+      switch (props.type) {
+        case movieType.popular:
+          // console.log(listMoviePopular.results);
+          listMovie = listMoviePopular;
+          break;
+        default:
+          listMovie = listMovieTopRate;
+          // console.log(listMovieTopRate.results);
+
+          break;
+      }
+    } else {
+      switch (props.type) {
+        case movieType.popular:
+          // console.log(props.type);
+          // console.log(listMoviePopular.results);
+
+          listMovie = listTvPopular;
+          break;
+        default:
+          listMovie = listTvTopRate;
+          // console.log(listMovieTopRate.results);
+
+          break;
+      }
     }
   }
-  // console.log(listMovie);
+  // useEffect(() => {
+
+  // }, [listMovieTopRate, listMoviePopular, listTvPopular, listTvTopRate]);
+
+  console.log("re-render");
+
   return (
     <div className="section mb-3">
       <div className="section__header mb-2">
@@ -54,8 +101,9 @@ function MovieList(props) {
         <Swiper
           slidesPerView={"auto"}
           spaceBetween={10}
+          navigation={{ clickable: true }}
           freeMode={true}
-          modules={[FreeMode]}
+          modules={[FreeMode, Navigation]}
         >
           {!listMovie.results
             ? ""

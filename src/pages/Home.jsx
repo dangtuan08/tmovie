@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getListMoviesPopuler,
   getListMoviesTopRate,
+  getListTVPopuler,
+  getListTVTopRate,
 } from "../slices/movieSlice";
 import { category, movieType } from "../api/tmdbApi";
 import { css } from "@emotion/react";
@@ -19,11 +21,27 @@ function Home() {
     const page = 1;
 
     dispatch(
-      getListMoviesPopuler({ type: movieType.popular, params: { page: page } })
+      getListMoviesPopuler({
+        type: movieType.popular,
+        params: { page: page },
+      })
     );
 
     dispatch(
       getListMoviesTopRate({
+        type: movieType.top_rated,
+        params: { page: page },
+      })
+    );
+
+    dispatch(
+      getListTVPopuler({
+        type: movieType.popular,
+        params: { page: page },
+      })
+    );
+    dispatch(
+      getListTVTopRate({
         type: movieType.top_rated,
         params: { page: page },
       })
@@ -44,9 +62,28 @@ function Home() {
       ) : (
         <>
           <Caroucel />
-          <MovieList category={category.movie} type={movieType.popular} />
-          <MovieList category={category.movie} type={movieType.top_rated} />
-          <MovieList />
+          <div className="container">
+            <MovieList
+              category={category.movie}
+              type={movieType.popular}
+              title="Trending Movies"
+            />
+            <MovieList
+              category={category.movie}
+              type={movieType.top_rated}
+              title="Top Rate Movies"
+            />
+            <MovieList
+              category={category.tv}
+              type={movieType.popular}
+              title="Trending Tv"
+            />
+            <MovieList
+              category={category.tv}
+              type={movieType.top_rated}
+              title="Top Rate Tv"
+            />
+          </div>
         </>
       )}
     </>

@@ -53,6 +53,7 @@ function Caroucel() {
     <div className="movie-slide">
       <Swiper
         spaceBetween={0}
+        loop={true}
         autoplay={{
           delay: 2500,
         }}

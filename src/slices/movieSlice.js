@@ -30,6 +30,24 @@ export const getListMoviesTopRate = createAsyncThunk(
   }
 );
 
+export const getListTVTopRate = createAsyncThunk(
+  "movie/getListTVTopRate",
+  async ({ type, params }) => {
+    console.log(type, params);
+    const response = await tmdbApi.getTvList(type, { params });
+    return response;
+  }
+);
+
+export const getListTVPopuler = createAsyncThunk(
+  "movie/getListTVPopuler",
+  async ({ type, params }) => {
+    console.log(type, params);
+    const response = await tmdbApi.getTvList(type, { params });
+    return response;
+  }
+);
+
 const movieSlice = createSlice({
   name: "movie",
   initialState,
@@ -45,6 +63,16 @@ const movieSlice = createSlice({
     },
     [getListMoviesTopRate.fulfilled]: (state, action) => {
       state.listMovieTopRate = action.payload;
+      state.status = "success";
+      state.loading = false;
+    },
+    [getListTVTopRate.fulfilled]: (state, action) => {
+      state.listTvTopRate = action.payload;
+      state.status = "success";
+      state.loading = false;
+    },
+    [getListTVPopuler.fulfilled]: (state, action) => {
+      state.listTvPopular = action.payload;
       state.status = "success";
       state.loading = false;
     },
