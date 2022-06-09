@@ -1,19 +1,44 @@
-.footer{
+.footer {
     position: relative;
-    padding: 6rem 2rem;
+    padding: 9.6rem 3.2rem;
     background-position: top;
     background-size: cover;
     background-repeat: no-repeat;
 }
 
-.footer__content{
+.footer__content {
     max-width: 1000px;
     margin: auto;
 }
 
 
-.footer__content--logo{
+.footer__content--logo {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 4.8rem;
+}
+
+.footer__content--menu {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+}
+
+.footer__content--menu--item {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.6rem;
+    font-size: 2.4rem;
+    font-weight: 600;
+
+    & > *~ * {
+        margin-top: 1.6rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .footer__content--menu {
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
 }
