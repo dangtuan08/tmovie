@@ -6,6 +6,7 @@ import { Autoplay, FreeMode, Navigation } from "swiper";
 // import "swiper/css/navigation";
 import "swiper/css";
 import "swiper/css/bundle";
+import { useNavigate } from "react-router-dom";
 
 import MovieCard from "../movie-card/MovieCard";
 import { useSelector } from "react-redux";
@@ -90,12 +91,17 @@ function MovieList(props) {
   // }, [listMovieTopRate, listMoviePopular, listTvPopular, listTvTopRate]);
 
   console.log("re-render");
-
+  let navigate = useNavigate();
+  const handleViewMore = () => {
+    navigate(`/${props.category}/type=${props.type}`);
+  };
   return (
     <div className="section mb-3">
       <div className="section__header mb-2">
         <h2>{title}</h2>
-        <OutlineButton className="small">View more</OutlineButton>
+        <OutlineButton className="small" onClick={handleViewMore}>
+          View more
+        </OutlineButton>
       </div>
       <div className="section__movie-list">
         <Swiper

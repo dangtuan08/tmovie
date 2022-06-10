@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, matchPath, useLocation, useParams } from "react-router-dom";
 
 import logo from "../../assets/tmovie.png";
 import "./header.scss";
@@ -22,9 +22,20 @@ const headerNav = [
 function Header() {
   const { pathname } = useLocation();
   const headerRef = useRef(null);
-  console.log(pathname);
-  const active = headerNav.findIndex((e) => e.path === pathname);
-  console.log(active);
+
+  let checkPath = pathname;
+
+  // Check pathname nếu có dạng = /:category/type=:type (/movie/type=popular)
+  const match = matchPath({ path: "/:category/type=:type" }, pathname);
+
+  // Nếu có match thì gán checkPath dạng /movie hoặc /tv
+  if (match) {
+    checkPath = `/${match.params.category}`;
+  }
+
+  // Lấy index của path trùng checkPath trong danh sách headerNav
+  const active = headerNav.findIndex((e) => e.path === checkPath);
+  // console.log(active);
   useEffect(() => {
     const shrinkHeader = () => {
       if (
@@ -53,6 +64,7 @@ function Header() {
         <ul className="header__nav">
           {headerNav.map((item, index) => {
             return (
+              // nếu index của item = với index tìm được thì thêm class active
               <li key={index} className={`${index === active ? "active" : ""}`}>
                 <Link to={item.path}>{item.display}</Link>
               </li>

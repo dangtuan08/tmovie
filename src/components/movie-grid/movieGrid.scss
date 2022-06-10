@@ -6,6 +6,28 @@
   margin-bottom: 4.8rem;
 }
 
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+
+ 
+
+  .btn-search {
+    position: absolute;
+    right: 0;
+  }
+
+}
+
+.movie-grid__loadmore{
+  text-align: center;
+}
+
+
 @media only screen and (max-width: 1024px) {
   .movie-grid {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));

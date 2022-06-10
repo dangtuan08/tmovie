@@ -2,7 +2,6 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import CatalogHeader from "../components/catalog-header/CatalogHeader";
 import { category as cate, movieType } from "../api/tmdbApi";
-import InputSearch from "../components/inputSearch/InputSearch";
 import MovieGrid from "../components/movie-grid/MovieGrid";
 
 function Catalog() {
@@ -14,8 +13,7 @@ function Catalog() {
       <CatalogHeader title={category === cate.movie ? "Movies" : "TV Series"} />
       <div className="container">
         <div className="section mb-3">
-          <InputSearch />
-          <MovieGrid />
+          <MovieGrid category={category} type={type ? type : null} />
         </div>
       </div>
     </>
