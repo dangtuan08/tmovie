@@ -1,5 +1,11 @@
 import React, { useEffect, useRef } from "react";
-import { Link, matchPath, useLocation, useParams } from "react-router-dom";
+import {
+  Link,
+  matchPath,
+  useLocation,
+  useMatch,
+  useParams,
+} from "react-router-dom";
 
 import logo from "../../assets/tmovie.png";
 import "./header.scss";
@@ -26,13 +32,20 @@ function Header() {
   let checkPath = pathname;
 
   // Check pathname nếu có dạng = /:category/type=:type (/movie/type=popular)
+  //Cách 1
   const match = matchPath({ path: "/:category/type=:type" }, pathname);
+
+  // Cách 2
+  let match1 = useMatch({ path: "/:category/type=:type", end: true });
+
+  // console.log(match);
+  // console.log(match1);
 
   // Nếu có match thì gán checkPath dạng /movie hoặc /tv
   if (match) {
     checkPath = `/${match.params.category}`;
   }
-
+  // console.log({ checkPath });
   // Lấy index của path trùng checkPath trong danh sách headerNav
   const active = headerNav.findIndex((e) => e.path === checkPath);
   // console.log(active);

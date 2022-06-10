@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { BeatLoader } from "react-spinners";
+import { useNavigate } from "react-router-dom";
+
 import tmdbApi, {
   category as cate,
   movieType,
@@ -30,9 +32,11 @@ import "./movieGrid.scss";
 
 const MovieGrid = ({ category, type: propsType }) => {
   let type = propsType;
+  const navigate = useNavigate();
 
   const [movies, setMovies] = useState([]);
   const [loadingSpiner, setLoadingSpiner] = useState(true);
+  const [keyword, setKeyword] = useState("");
   let page = useRef();
 
   // nếu propsType = null thì set type mặc định để call api là popular theo loại category truyền vào
@@ -107,6 +111,16 @@ const MovieGrid = ({ category, type: propsType }) => {
     }
   };
 
+  const handleSearch = () => {
+    navigate(`/${category}/search/${keyword}}`);
+  };
+
+  const handleChange = (e) => {
+    console.log(e.target.value);
+    setKeyword(e.target.value);
+  };
+
+  // console.log("re-render");
   return (
     <>
       {loadingSpiner ? (
@@ -117,8 +131,14 @@ const MovieGrid = ({ category, type: propsType }) => {
         <>
           <div className="section mb-3">
             <div className="search">
-              <InputSearch placeholder="Search..." />
-              <Button className="btn-search small">Search</Button>
+              <InputSearch
+                placeholder="Search..."
+                value={keyword}
+                onChange={handleChange}
+              />
+              <Button className="btn-search small" onClick={handleSearch}>
+                Search
+              </Button>
             </div>
           </div>
 

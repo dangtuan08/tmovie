@@ -19,8 +19,8 @@ function Routes() {
       />
       <Route path={"/"} element={<Home />} />
       <Route path={"/:category/:id"} element={<Detail />} />
-      <Route path={"/:category/type=:type"} element={<Catalog />} />
       <Route path={"/:category"} element={<Catalog />} />
+      <Route path={"/:category/type=:type"} element={<Catalog />} />
       <Route path={"/:category/search/:keyword"} element={<Catalog />} />
     </Switch>
   );
