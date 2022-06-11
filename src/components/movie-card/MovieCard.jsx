@@ -35,7 +35,7 @@ function MovieCard({ movie, category }) {
         </Button>
       </div>
       <Link to={`/movie/${movie.id}`}>
-        <h3>{movie.title}</h3>
+        <h3>{movie.title || movie.name}</h3>
       </Link>
     </div>
   );

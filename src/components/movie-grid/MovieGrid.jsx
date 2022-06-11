@@ -37,6 +37,7 @@ const MovieGrid = ({ category, type: propsType }) => {
   const [movies, setMovies] = useState([]);
   const [loadingSpiner, setLoadingSpiner] = useState(true);
   const [keyword, setKeyword] = useState("");
+  const [loadMore, setLoadMore] = useState(true);
   let page = useRef();
 
   // nếu propsType = null thì set type mặc định để call api là popular theo loại category truyền vào
@@ -62,7 +63,9 @@ const MovieGrid = ({ category, type: propsType }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
     page.current = 1;
+
     setLoadingSpiner(true);
+
     if (category === cate.movie) {
       setLoadingSpiner(true);
       tmdbApi
@@ -72,6 +75,10 @@ const MovieGrid = ({ category, type: propsType }) => {
         .then((res) => {
           setMovies(res.results);
           setLoadingSpiner(false);
+
+          if (res.page === res.total_pages) {
+            setLoadMore(false);
+          }
         })
         .catch((err) => console.log(err));
     } else {
@@ -82,6 +89,10 @@ const MovieGrid = ({ category, type: propsType }) => {
         .then((res) => {
           setMovies(res.results);
           setLoadingSpiner(false);
+
+          if (res.page === res.total_pages) {
+            setLoadMore(false);
+          }
         })
         .catch((err) => console.log(err));
     }
@@ -90,6 +101,7 @@ const MovieGrid = ({ category, type: propsType }) => {
   const handleLoadMore = () => {
     page.current = page.current + 1;
     // console.log("handleLoadMore", page);
+    // if (keyword)
     if (category === cate.movie) {
       tmdbApi
         .getMoviesList(type, {
@@ -111,12 +123,25 @@ const MovieGrid = ({ category, type: propsType }) => {
     }
   };
 
-  const handleSearch = () => {
-    navigate(`/${category}/search/${keyword}}`);
+  const handleSearchClick = () => {
+    console.log(keyword.trim());
+    console.log(`/${category}/search/${keyword}`);
+    navigate(`/${category}/search/${keyword}`);
+    tmdbApi
+      .search(category, { params: { query: keyword } })
+      .then((res) => {
+        console.log(res);
+        setMovies(res.results);
+        if (res.page === res.total_pages) {
+          setLoadMore(false);
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleChange = (e) => {
     console.log(e.target.value);
+    // const value = e.target.value.trim();
     setKeyword(e.target.value);
   };
 
@@ -136,7 +161,7 @@ const MovieGrid = ({ category, type: propsType }) => {
                 value={keyword}
                 onChange={handleChange}
               />
-              <Button className="btn-search small" onClick={handleSearch}>
+              <Button className="btn-search small" onClick={handleSearchClick}>
                 Search
               </Button>
             </div>
@@ -149,11 +174,13 @@ const MovieGrid = ({ category, type: propsType }) => {
               );
             })}
           </div>
-          <div className="movie-grid__loadmore">
-            <OutlineButton onClick={handleLoadMore} className="small">
-              Load more
-            </OutlineButton>
-          </div>
+          {loadMore && (
+            <div className="movie-grid__loadmore">
+              <OutlineButton onClick={handleLoadMore} className="small">
+                Load more
+              </OutlineButton>
+            </div>
+          )}
         </>
       )}
     </>
