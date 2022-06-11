@@ -11,10 +11,10 @@ import "./caroucel.scss";
 const CaroucelItem = (props) => {
   let hisrory = useNavigate();
   const dispatch = useDispatch();
-
-  const urlImgBG = apiConfig.w500Image(props.item.backdrop_path);
-  const urlPoster = apiConfig.originalImage(props.item.poster_path);
-
+  console.log("render caroucel");
+  const urlImgBG = apiConfig.originalImage(props.item.backdrop_path);
+  const urlPoster = apiConfig.w500Image(props.item.poster_path);
+  // console.log(urlPoster, urlImgBG);
   const handleBtnTrailer = () => {
     // const getVideo = async () => {
     //   const videos = await tmdbApi.getVideos(category.movie, props.item.id);
