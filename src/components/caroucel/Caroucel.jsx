@@ -56,7 +56,7 @@ function Caroucel() {
         spaceBetween={0}
         loop={true}
         autoplay={{
-          delay: 2500,
+          delay: 5000,
         }}
         modules={[Autoplay]}
       >
