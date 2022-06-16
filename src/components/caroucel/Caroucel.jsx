@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 
 function Caroucel() {
   // const [movieItems, setMovieItems] = useState([]);
+  console.log("render Caroucel");
   let listMoviesShow = [];
   const listMovies = useSelector(
     (state) => state.movieReducer.listMoviePopular.results
@@ -55,7 +56,7 @@ function Caroucel() {
         spaceBetween={0}
         loop={true}
         autoplay={{
-          delay: 2500,
+          delay: 5000,
         }}
         modules={[Autoplay]}
       >

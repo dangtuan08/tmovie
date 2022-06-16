@@ -1,7 +1,12 @@
 import React from "react";
+import Content from "../components/detail-layout/content/Content";
 
 function Detail() {
-  return <div>Detail</div>;
+  return (
+    <>
+      <Content />
+    </>
+  );
 }
 
 export default Detail;

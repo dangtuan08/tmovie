@@ -25,7 +25,13 @@ function ModalVideo() {
   return (
     <div className={`modal-video ${isActive ? "active" : ""}`}>
       <div className="modal-body">
-        <YouTube className="youtube-player" videoId={idVideo} opts={opts} />
+        {idVideo ? (
+          <YouTube className="youtube-player" videoId={idVideo} opts={opts} />
+        ) : (
+          <div className="no-trailer">
+            <h2>No Trailer</h2>
+          </div>
+        )}
         <button className="btn-close" onClick={handleClose}>
           X
         </button>

@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { BeatLoader } from "react-spinners";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import tmdbApi, {
   category as cate,
@@ -32,11 +32,11 @@ import "./movieGrid.scss";
 
 const MovieGrid = ({ category, type: propsType }) => {
   let type = propsType;
-  const navigate = useNavigate();
+  const params = useParams();
 
   const [movies, setMovies] = useState([]);
   const [loadingSpiner, setLoadingSpiner] = useState(true);
-  const [keyword, setKeyword] = useState("");
+  const [loadMore, setLoadMore] = useState(true);
   let page = useRef();
 
   // nếu propsType = null thì set type mặc định để call api là popular theo loại category truyền vào
@@ -62,8 +62,25 @@ const MovieGrid = ({ category, type: propsType }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
     page.current = 1;
+
     setLoadingSpiner(true);
-    if (category === cate.movie) {
+
+    if (params.keyword) {
+      tmdbApi
+        .search(category, {
+          params: { page: page.current, query: params.keyword },
+        })
+        .then((res) => {
+          setMovies(res.results);
+          console.log(res);
+          setLoadingSpiner(false);
+          if (res.page < res.total_pages) {
+            setLoadMore(true);
+          } else {
+            setLoadMore(false);
+          }
+        });
+    } else if (category === cate.movie) {
       setLoadingSpiner(true);
       tmdbApi
         .getMoviesList(type, {
@@ -72,6 +89,10 @@ const MovieGrid = ({ category, type: propsType }) => {
         .then((res) => {
           setMovies(res.results);
           setLoadingSpiner(false);
+
+          if (res.page === res.total_pages) {
+            setLoadMore(false);
+          }
         })
         .catch((err) => console.log(err));
     } else {
@@ -82,15 +103,35 @@ const MovieGrid = ({ category, type: propsType }) => {
         .then((res) => {
           setMovies(res.results);
           setLoadingSpiner(false);
+
+          if (res.page === res.total_pages) {
+            setLoadMore(false);
+          }
         })
         .catch((err) => console.log(err));
     }
-  }, [category, type]);
+  }, [category, type, params.keyword]);
 
   const handleLoadMore = () => {
     page.current = page.current + 1;
     // console.log("handleLoadMore", page);
-    if (category === cate.movie) {
+    // if (keyword)
+    if (params.keyword) {
+      tmdbApi
+        .search(category, {
+          params: { page: page.current, query: params.keyword },
+        })
+        .then((res) => {
+          setMovies([...movies, ...res.results]);
+          setLoadingSpiner(false);
+
+          if (res.page < res.total_pages) {
+            setLoadMore(true);
+          } else {
+            setLoadMore(false);
+          }
+        });
+    } else if (category === cate.movie) {
       tmdbApi
         .getMoviesList(type, {
           params: { page: page.current },
@@ -111,16 +152,7 @@ const MovieGrid = ({ category, type: propsType }) => {
     }
   };
 
-  const handleSearch = () => {
-    navigate(`/${category}/search/${keyword}}`);
-  };
-
-  const handleChange = (e) => {
-    console.log(e.target.value);
-    setKeyword(e.target.value);
-  };
-
-  // console.log("re-render");
+  console.log("re-render", movies);
   return (
     <>
       {loadingSpiner ? (
@@ -130,16 +162,7 @@ const MovieGrid = ({ category, type: propsType }) => {
       ) : (
         <>
           <div className="section mb-3">
-            <div className="search">
-              <InputSearch
-                placeholder="Search..."
-                value={keyword}
-                onChange={handleChange}
-              />
-              <Button className="btn-search small" onClick={handleSearch}>
-                Search
-              </Button>
-            </div>
+            <MovieSearch category={category} />
           </div>
 
           <div className="movie-grid">
@@ -149,14 +172,48 @@ const MovieGrid = ({ category, type: propsType }) => {
               );
             })}
           </div>
-          <div className="movie-grid__loadmore">
-            <OutlineButton onClick={handleLoadMore} className="small">
-              Load more
-            </OutlineButton>
-          </div>
+          {loadMore && (
+            <div className="movie-grid__loadmore">
+              <OutlineButton onClick={handleLoadMore} className="small">
+                Load more
+              </OutlineButton>
+            </div>
+          )}
         </>
       )}
     </>
+  );
+};
+
+const MovieSearch = ({ category }) => {
+  const [keyword, setKeyword] = useState("");
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    // console.log(e.target.value);
+    const value = e.target.value;
+    if (!value.startsWith(" ")) {
+      setKeyword(e.target.value);
+    }
+  };
+
+  const handleSearchClick = useCallback(() => {
+    // console.log(keyword.trim());
+    // console.log(`/${category}/search/${keyword}`);
+
+    navigate(`/${category}/search/${keyword.trim()}`);
+  });
+  return (
+    <div className="search">
+      <InputSearch
+        placeholder="Search..."
+        value={keyword}
+        onChange={handleChange}
+      />
+      <Button className="btn-search small" onClick={handleSearchClick}>
+        Search
+      </Button>
+    </div>
   );
 };
 

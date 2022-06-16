@@ -4,6 +4,7 @@ import {
   matchPath,
   useLocation,
   useMatch,
+  useNavigate,
   useParams,
 } from "react-router-dom";
 
@@ -28,7 +29,7 @@ const headerNav = [
 function Header() {
   const { pathname } = useLocation();
   const headerRef = useRef(null);
-
+  const navigate = useNavigate();
   let checkPath = pathname;
 
   // Check pathname nếu có dạng = /:category/type=:type (/movie/type=popular)
@@ -70,7 +71,13 @@ function Header() {
     <div ref={headerRef} className="header">
       <div className="header__wrap container">
         <div className="logo">
-          <img src={logo} alt="logo" />
+          <img
+            src={logo}
+            alt="logo"
+            onClick={() => {
+              navigate("/");
+            }}
+          />
           <Link to="/">tMovies</Link>
         </div>
 
