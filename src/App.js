@@ -1,4 +1,5 @@
 import "./assets/boxicons-2.0.7/css/boxicons.min.css";
+import "./Grid.scss";
 import "./App.scss";
 
 import { BrowserRouter } from "react-router-dom";
