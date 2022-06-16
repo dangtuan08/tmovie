@@ -29,7 +29,7 @@
 }
 
 .movie-content__poster {
-  flex: 1;
+  // flex: 1;
   .movie-content__poster__img {
     background-position: center;
     background-size: cover;
@@ -40,14 +40,14 @@
   }
 }
 
-.movie-content__info {
-  width: 70%;
-  padding-left: 3.2rem;
-}
+// .movie-content__info {
+//   width: 70%;
+//   padding-left: 3.2rem;
+// }
 
-.casts {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-  grid-gap: 10px;
-  gap: 10px;
-}
+// .casts {
+//   display: grid;
+//   grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+//   grid-gap: 10px;
+//   gap: 10px;
+// }

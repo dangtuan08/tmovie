@@ -11,8 +11,8 @@ const Banner = () => {
         backgroundImage: `url("https://image.tmdb.org/t/p/original//gG9fTyDL03fiKnOpf2tr01sncnt.jpg")`,
       }}
     >
-      <div className="movie-content">
-        <div className="movie-content__poster">
+      <div className="movie-content row">
+        <div className="movie-content__poster col c-0 m-4">
           <div
             class="movie-content__poster__img"
             style={{
@@ -26,7 +26,7 @@ const Banner = () => {
           </div>
         </div>
 
-        <div className="movie-content__info">
+        <div className="movie-content__info col c-12 m-8">
           <h2 className="title">Mobius</h2>
           <div className="genres">
             <OutlineButton className="small">Action</OutlineButton>
@@ -41,36 +41,36 @@ const Banner = () => {
           </p>
           <div className="section-cast">
             <h3 className="cast-title">Casts</h3>
-            <div className="casts">
-              <div className="cast__item">
+            <div className="casts row">
+              <div className="cast__item col l-2 m-3 c-3 ">
                 <img
                   src="https://image.tmdb.org/t/p/w500//ca3x0OfIKbJppZh8S1Alx3GfUZO.jpg"
                   alt="cast"
                 />
                 <p>Jared Leto</p>
               </div>
-              <div className="cast__item">
+              <div className="cast__item col l-2 m-3 c-3">
                 <img
                   src="https://image.tmdb.org/t/p/w500//ca3x0OfIKbJppZh8S1Alx3GfUZO.jpg"
                   alt="cast"
                 />
                 <p>Jared Leto</p>
               </div>
-              <div className="cast__item">
+              <div className="cast__item col l-2 m-3 c-3">
                 <img
                   src="https://image.tmdb.org/t/p/w500//ca3x0OfIKbJppZh8S1Alx3GfUZO.jpg"
                   alt="cast"
                 />
                 <p>Jared Leto</p>
               </div>
-              <div className="cast__item">
+              <div className="cast__item col l-2 m-3 c-3">
                 <img
                   src="https://image.tmdb.org/t/p/w500//ca3x0OfIKbJppZh8S1Alx3GfUZO.jpg"
                   alt="cast"
                 />
                 <p>Jared Leto</p>
               </div>
-              <div className="cast__item">
+              <div className="cast__item col l-2 m-3 c-3">
                 <img
                   src="https://image.tmdb.org/t/p/w500//ca3x0OfIKbJppZh8S1Alx3GfUZO.jpg"
                   alt="cast"
