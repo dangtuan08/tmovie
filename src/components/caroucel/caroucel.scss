@@ -99,10 +99,10 @@
   .btns {
     transition-delay: 0.9s;
   }
-  
-  .movie-slide__item__content__poster{
-    img{
-      transform: scale(1)
+
+  .movie-slide__item__content__poster {
+    img {
+      transform: scale(1);
     }
   }
 }
@@ -117,6 +117,7 @@
     width: 400px;
     border-radius: var(--border-radius);
     transform: scale(0);
+    box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
     transition: transform 0.7s ease;
   }
 }
@@ -244,9 +245,8 @@
       font-size: 4.8rem;
     }
   }
-  .movie-slide__item{
+  .movie-slide__item {
     min-height: 494px;
-
   }
 
   .movie-slide__item__content__poster {
@@ -255,8 +255,7 @@
 }
 
 @media only screen and (max-width: 600px) {
-  .movie-slide__item{
+  .movie-slide__item {
     min-height: 416px;
-
   }
 }

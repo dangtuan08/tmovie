@@ -4,7 +4,8 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 20rem 0;
+  padding: 20rem 0 15rem;
+  margin-bottom: 3.2rem;
   &:before {
     content: "";
     position: absolute;
@@ -14,6 +15,16 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
     z-index: 0;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background-image: linear-gradient(to top, #0f0f0f, rgba(0, 0, 0, 0));
   }
 }
 
