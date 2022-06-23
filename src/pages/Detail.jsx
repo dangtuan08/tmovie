@@ -10,7 +10,8 @@ import MovieList from "../components/movie-list/MovieList";
 function Detail() {
   const [detailMovie, setDetailMovie] = useState({});
   const [loading, setLoading] = useState(true);
-  console.log(detailMovie);
+  const [trailer, setTrailer] = useState([]);
+
   const params = useParams();
   // const [id, category] = params;
   // console.log(params);
@@ -18,16 +19,54 @@ function Detail() {
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoading(true);
-    tmdbApi
-      .detail(params.category, params.id, { params: {} })
-      .then((res) => {
-        // console.log(res);
-        setDetailMovie(res);
+
+    // tmdbApi
+    //   .detail(params.category, params.id, { params: {} })
+    //   .then((res) => {
+    //     // console.log(res);
+    //     setDetailMovie(res);
+    //     setLoading(false);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+
+    const getDetail = async () => {
+      try {
+        const detail = await tmdbApi.detail(params.category, params.id, {
+          params: {},
+        });
+
+        const videoTrailer = await tmdbApi.getVideos(
+          params.category,
+          params.id
+        );
+        console.log(videoTrailer);
+        if (videoTrailer.results.length > 0) {
+          setTrailer(videoTrailer.results.slice(0, 5));
+        } else {
+          setTrailer(videoTrailer.results);
+        }
+        setDetailMovie(detail);
         setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getDetail();
+
+    // tmdbApi
+    //   .getVideos(params.category, params.id)
+    //   .then((res) => {
+    //     console.log(res.results);
+    //     setTrailer(res.results)
+    //     setLoading(false);
+
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }, [params]);
 
   return (
@@ -38,12 +77,12 @@ function Detail() {
         </div>
       ) : (
         <>
-          <Content movie={detailMovie} />
+          <Content movie={detailMovie} category={params.category} />
           <div className="container">
-            {/* <Video />
-        <Video />
-        <Video />
-        <Video /> */}
+            {trailer.map((item) => {
+              return <Video key={item.key} trailer={item} />;
+            })}
+
             <MovieList
               category={category.movie}
               type={movieType.popular}

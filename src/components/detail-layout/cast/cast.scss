@@ -1,0 +1,17 @@
+.cast__item {
+  p {
+    text-align: center;
+  }
+}
+
+.cast__item--img {
+  padding-top: 150%;
+  position: relative;
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
