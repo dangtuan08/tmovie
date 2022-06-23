@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 
@@ -6,6 +7,7 @@ import tmdbApi, { category, movieType } from "../api/tmdbApi";
 import Content from "../components/detail-layout/content/Content";
 import Video from "../components/detail-layout/video/Video";
 import MovieList from "../components/movie-list/MovieList";
+import { getListSimilar, resetSimilar } from "../slices/movieSlice";
 
 function Detail() {
   const [detailMovie, setDetailMovie] = useState({});
@@ -15,10 +17,13 @@ function Detail() {
   const params = useParams();
   // const [id, category] = params;
   // console.log(params);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoading(true);
+
+    dispatch(getListSimilar({ id: params.id, cate: params.category }));
 
     // tmdbApi
     //   .detail(params.category, params.id, { params: {} })
@@ -41,7 +46,7 @@ function Detail() {
           params.category,
           params.id
         );
-        console.log(videoTrailer);
+        // console.log(videoTrailer);
         if (videoTrailer.results.length > 0) {
           setTrailer(videoTrailer.results.slice(0, 5));
         } else {
@@ -67,8 +72,12 @@ function Detail() {
     //   .catch((err) => {
     //     console.log(err);
     //   });
+    return () => {
+      dispatch(resetSimilar());
+    };
   }, [params]);
 
+  console.log(params.category);
   return (
     <>
       {loading ? (
@@ -84,9 +93,10 @@ function Detail() {
             })}
 
             <MovieList
-              category={category.movie}
-              type={movieType.popular}
-              title="Trending Movies"
+              category={params.category}
+              type="similar"
+              id={params.id}
+              title="Similar"
             />
           </div>
         </>

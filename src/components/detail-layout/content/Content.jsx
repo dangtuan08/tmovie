@@ -6,7 +6,7 @@ import Cast from "../cast/Cast";
 import "./content.scss";
 
 const Content = ({ movie, category }) => {
-  console.log(movie);
+  // console.log(movie);
   return (
     <div
       className="banner"

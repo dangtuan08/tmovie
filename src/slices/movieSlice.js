@@ -48,10 +48,24 @@ export const getListTVPopuler = createAsyncThunk(
   }
 );
 
+export const getListSimilar = createAsyncThunk(
+  "movie/getListSimilar",
+  async ({ id, cate }) => {
+    // console.log(id, cate);
+    const response = await tmdbApi.similar(cate, id);
+    return response;
+  }
+);
+
 const movieSlice = createSlice({
   name: "movie",
   initialState,
-  reducers: {},
+  reducers: {
+    resetSimilar: (state, action) => {
+      state.loading = true;
+      state.listSimilar = [];
+    },
+  },
   extraReducers: {
     [getListMoviesPopuler.pending]: (state, action) => {
       state.status = "pending";
@@ -76,7 +90,14 @@ const movieSlice = createSlice({
       state.status = "success";
       state.loading = false;
     },
+    [getListSimilar.fulfilled]: (state, action) => {
+      state.listSimilar = action.payload;
+      state.status = "success";
+      state.loading = false;
+    },
   },
 });
+
+export const { resetSimilar } = movieSlice.actions;
 
 export default movieSlice.reducer;

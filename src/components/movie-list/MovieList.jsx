@@ -57,6 +57,14 @@ function MovieList(props) {
     }
   });
 
+  const listSimilar = useSelector((state) => {
+    if (props.type === "similar") {
+      return state.movieReducer.listSimilar;
+    } else {
+      return null;
+    }
+  });
+
   if (props.type !== "similar") {
     if (props.category === category.movie) {
       switch (props.type) {
@@ -72,7 +80,7 @@ function MovieList(props) {
       }
     } else {
       switch (props.type) {
-        case movieType.popular:
+        case tvType.popular:
           // console.log(props.type);
           // console.log(listMoviePopular.results);
 
@@ -85,16 +93,26 @@ function MovieList(props) {
           break;
       }
     }
+  } else {
+    if (props.category === category.movie) {
+      console.log("Movie", props.type);
+      listMovie = listSimilar;
+    } else {
+      listMovie = listSimilar;
+      console.log("TV", props.type);
+    }
   }
   // useEffect(() => {
 
   // }, [listMovieTopRate, listMoviePopular, listTvPopular, listTvTopRate]);
 
-  console.log("re-render");
+  // console.log("re-render");
+
   let navigate = useNavigate();
   const handleViewMore = () => {
     navigate(`/${props.category}/type=${props.type}`);
   };
+
   return (
     <div className="section mb-3">
       <div className="section__header mb-2">

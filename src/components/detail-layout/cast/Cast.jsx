@@ -15,7 +15,7 @@ const Cast = ({ id, category }) => {
     getCasts();
   }, [id]);
 
-  console.log(casts);
+  //   console.log(casts);
 
   const renderCastItems = () => {
     return casts.map((item) => {
