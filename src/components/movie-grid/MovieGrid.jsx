@@ -157,7 +157,7 @@ const MovieGrid = ({ category, type: propsType }) => {
     <>
       {loadingSpiner ? (
         <div className="loading">
-          <BeatLoader color={"#ff0000"} size={100} />
+          <BeatLoader color={"#ff0000"} size={80} />
         </div>
       ) : (
         <>

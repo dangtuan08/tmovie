@@ -77,12 +77,12 @@ function Detail() {
     };
   }, [params]);
 
-  console.log(params.category);
+  // console.log(params.category);
   return (
     <>
       {loading ? (
         <div className="loading">
-          <BeatLoader color={"#ff0000"} size={150} />
+          <BeatLoader color={"#ff0000"} size={80} />
         </div>
       ) : (
         <>

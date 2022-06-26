@@ -8,6 +8,7 @@ import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import Routes from "./config/Routes";
 import ModalVideo from "./components/modal-video/ModalVideo";
+import ButtonToTop from "./components/to-top/ButtonToTop";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <div className="page-wrap">
         <Header />
         <Routes />
+        <ButtonToTop />
         <Footer />
         <ModalVideo />
       </div>

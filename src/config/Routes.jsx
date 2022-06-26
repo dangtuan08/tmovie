@@ -9,14 +9,6 @@ import Home from "../pages/Home";
 function Routes() {
   return (
     <Switch>
-      <Route
-        element={
-          <>
-            <Header />
-            <Outlet />
-          </>
-        }
-      />
       <Route path={"/"} element={<Home />} />
       <Route path={"/:category/:id"} element={<Detail />} />
       <Route path={"/:category"} element={<Catalog />} />
