@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 
 function Caroucel() {
   // const [movieItems, setMovieItems] = useState([]);
-  console.log("render Caroucel");
+  // console.log("render Caroucel");
   let listMoviesShow = [];
   const listMovies = useSelector(
     (state) => state.movieReducer.listMoviePopular.results

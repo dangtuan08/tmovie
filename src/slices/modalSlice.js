@@ -10,7 +10,7 @@ export const openModalVideoThunk = createAsyncThunk(
   "modal/getIdVideo",
   async ({ type, id }) => {
     const response = await tmdbApi.getVideos(type, id);
-    console.log(response.results.length > 0);
+    // console.log(response.results.length > 0);
     if (response.results.length > 0) {
       return response.results[0].key;
     } else return "";

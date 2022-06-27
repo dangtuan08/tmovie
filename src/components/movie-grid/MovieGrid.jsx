@@ -72,7 +72,7 @@ const MovieGrid = ({ category, type: propsType }) => {
         })
         .then((res) => {
           setMovies(res.results);
-          console.log(res);
+          // console.log(res);
           setLoadingSpiner(false);
           if (res.page < res.total_pages) {
             setLoadMore(true);
@@ -152,7 +152,7 @@ const MovieGrid = ({ category, type: propsType }) => {
     }
   };
 
-  console.log("re-render", movies);
+  // console.log("re-render", movies);
   return (
     <>
       {loadingSpiner ? (

@@ -24,7 +24,7 @@ export const getListMoviesPopuler = createAsyncThunk(
 export const getListMoviesTopRate = createAsyncThunk(
   "movie/getListMoviesTopRate",
   async ({ type, params }) => {
-    console.log(type, params);
+    // console.log(type, params);
     const response = await tmdbApi.getMoviesList(type, { params });
     return response;
   }
@@ -33,7 +33,7 @@ export const getListMoviesTopRate = createAsyncThunk(
 export const getListTVTopRate = createAsyncThunk(
   "movie/getListTVTopRate",
   async ({ type, params }) => {
-    console.log(type, params);
+    // console.log(type, params);
     const response = await tmdbApi.getTvList(type, { params });
     return response;
   }
@@ -42,7 +42,7 @@ export const getListTVTopRate = createAsyncThunk(
 export const getListTVPopuler = createAsyncThunk(
   "movie/getListTVPopuler",
   async ({ type, params }) => {
-    console.log(type, params);
+    // console.log(type, params);
     const response = await tmdbApi.getTvList(type, { params });
     return response;
   }

@@ -3,7 +3,7 @@ import { OutlineButton } from "../button/Button";
 import "./buttonToTop.scss";
 const ButtonToTop = () => {
   const [toTop, setToTop] = useState(false);
-  console.log("to top");
+  // console.log("to top");
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.scrollY > 100) {

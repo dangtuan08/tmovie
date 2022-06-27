@@ -95,11 +95,11 @@ function MovieList(props) {
     }
   } else {
     if (props.category === category.movie) {
-      console.log("Movie", props.type);
+      // console.log("Movie", props.type);
       listMovie = listSimilar;
     } else {
       listMovie = listSimilar;
-      console.log("TV", props.type);
+      // console.log("TV", props.type);
     }
   }
   // useEffect(() => {
@@ -117,9 +117,13 @@ function MovieList(props) {
     <div className="section mb-3">
       <div className="section__header mb-2">
         <h2>{title}</h2>
-        <OutlineButton className="small" onClick={handleViewMore}>
-          View more
-        </OutlineButton>
+        {props.type === "similar" ? (
+          ""
+        ) : (
+          <OutlineButton className="small" onClick={handleViewMore}>
+            View more
+          </OutlineButton>
+        )}
       </div>
       <div className="section__movie-list">
         <Swiper
@@ -131,9 +135,9 @@ function MovieList(props) {
         >
           {!listMovie.results
             ? ""
-            : listMovie.results.map((item) => {
+            : listMovie.results.map((item, index) => {
                 return (
-                  <SwiperSlide>
+                  <SwiperSlide key={index}>
                     <MovieCard category={props.category} movie={item} />
                   </SwiperSlide>
                 );

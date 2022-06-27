@@ -11,7 +11,7 @@ import "./caroucel.scss";
 const CaroucelItem = (props) => {
   let hisrory = useNavigate();
   const dispatch = useDispatch();
-  console.log("render caroucel");
+  // console.log("render caroucel");
   const urlImgBG = apiConfig.originalImage(props.item.backdrop_path);
   const urlPoster = apiConfig.w500Image(props.item.poster_path);
   // console.log(urlPoster, urlImgBG);
