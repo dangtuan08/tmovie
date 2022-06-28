@@ -5,13 +5,17 @@ const ButtonToTop = () => {
   const [toTop, setToTop] = useState(false);
   // console.log("to top");
   useEffect(() => {
-    window.addEventListener("scroll", () => {
+    const scrollEvent = () => {
       if (window.scrollY > 100) {
         setToTop(true);
       } else {
         setToTop(false);
       }
-    });
+    };
+    window.addEventListener("scroll", scrollEvent);
+    return () => {
+      window.removeEventListener("scroll", scrollEvent);
+    };
   }, []);
 
   const scrollUp = () => {

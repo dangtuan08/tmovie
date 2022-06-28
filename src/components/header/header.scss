@@ -51,7 +51,35 @@
     position: relative;
     font-size: 2.4rem;
 
+    //   START: CSS Animate the Color of a Text Link on Hover (use data-content in <Link/>)
+
+    // a {
+    //   position: relative;
+    //   overflow: hidden;
+    //   display: block;
+    //   &::before {
+    //     position: absolute;
+    //     content: attr(data-content);
+    //     top: 0;
+    //     left: 0;
+    //     width: 0%;
+    //     height: 100%;
+    //     color: var(--main-color);
+    //     white-space: nowrap;
+    //     overflow: hidden;
+    //     transition: width 0.5s ease;
+    //   }
+    // }
+
+    // &:hover a::before {
+    //   width: 100%;
+    //   height: 100%;
+    // }
+
+    //    END: CSS Animate the Color of a Text Link on Hover
+
     &:hover a {
+      transition: color ease 0.5s;
       color: var(--main-color);
     }
 

@@ -8,6 +8,7 @@ const InputSearch = (props) => {
       placeholder={props.placeholder}
       value={props.value}
       onChange={props.onChange ? (e) => props.onChange(e) : null}
+      onKeyPress={props.onKeyPress ? (e) => props.onKeyPress(e) : null}
     />
   );
 };

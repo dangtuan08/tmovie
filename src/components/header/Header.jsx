@@ -87,6 +87,9 @@ function Header() {
               // nếu index của item = với index tìm được thì thêm class active
               <li key={index} className={`${index === active ? "active" : ""}`}>
                 <Link to={item.path}>{item.display}</Link>
+                {/* <Link data-content={item.display} to={item.path}>
+                  {item.display}
+                </Link> */}
               </li>
             );
           })}

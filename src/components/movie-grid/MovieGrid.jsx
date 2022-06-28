@@ -209,6 +209,11 @@ const MovieSearch = ({ category }) => {
         placeholder="Search..."
         value={keyword}
         onChange={handleChange}
+        onKeyPress={(event) => {
+          if ((event.key === "Enter") & !!keyword) {
+            handleSearchClick();
+          }
+        }}
       />
       <Button className="btn-search small" onClick={handleSearchClick}>
         Search

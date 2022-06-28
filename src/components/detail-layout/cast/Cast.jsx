@@ -13,7 +13,7 @@ const Cast = ({ id, category }) => {
       setCasts(res.cast.slice(0, 5));
     };
     getCasts();
-  }, [id]);
+  }, [category, id]);
 
   //   console.log(casts);
 
