@@ -20,18 +20,41 @@
   border-radius: var(--border-radius);
   margin-bottom: 1rem;
 
+  overflow: hidden;
+
+  &:before {
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 50%;
+    width: 200%;
+    background-color: red;
+    // z-index: 10;
+    display: none;
+  }
+
+  &:hover::before {
+    display: block;
+    animation: spinner linear 2s infinite;
+  }
+
+  @keyframes spinner {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+      transform: translate(-50%, -50%) rotate(180deg);
+    }
+  }
   & .overlay {
     content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba($color: #000000, $alpha: 0.6);
-    border-radius: var(--border-radius);
     cursor: pointer;
+    border-radius: var(--border-radius);
     opacity: 0;
     transition: opacity ease 0.2s;
+    margin: 3px;
   }
 
   img {
@@ -44,6 +67,7 @@
     background-size: cover;
     border-radius: var(--border-radius);
     // margin-bottom: 1.3rem;
+    padding: 4px;
   }
 
   .btn-trailer {

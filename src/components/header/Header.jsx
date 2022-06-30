@@ -3,9 +3,9 @@ import {
   Link,
   matchPath,
   useLocation,
-  useMatch,
+  // useMatch,
   useNavigate,
-  useParams,
+  // useParams,
 } from "react-router-dom";
 
 import logo from "../../assets/tmovie.png";
@@ -37,7 +37,7 @@ function Header() {
   const match = matchPath({ path: "/:category/type=:type" }, pathname);
 
   // Cách 2
-  let match1 = useMatch({ path: "/:category/type=:type", end: true });
+  // let match1 = useMatch({ path: "/:category/type=:type", end: true });
 
   // console.log(match);
   // console.log(match1);

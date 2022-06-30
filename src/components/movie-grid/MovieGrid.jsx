@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BeatLoader } from "react-spinners";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -197,12 +197,12 @@ const MovieSearch = ({ category }) => {
     }
   };
 
-  const handleSearchClick = useCallback(() => {
+  const handleSearchClick = () => {
     // console.log(keyword.trim());
     // console.log(`/${category}/search/${keyword}`);
 
     navigate(`/${category}/search/${keyword.trim()}`);
-  });
+  };
   return (
     <div className="search">
       <InputSearch
